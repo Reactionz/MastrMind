@@ -106,6 +106,7 @@ router.delete("/delete", auth, async (req, res) => {
     }
 });
 
+// User Validation
 router.post("/isTokenValid", async (req, res) => {
     try { 
         const jwtToken = req.header("x-auth-token");
