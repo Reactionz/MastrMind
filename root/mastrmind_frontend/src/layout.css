@@ -9,7 +9,7 @@
 }
 
 a {
-    color: darkviolet;
+    color: #ffffff;
     text-decoration: unset;
 }
 
@@ -27,4 +27,50 @@ button, input[type = "submit"] {
 
 h1, h2, h3, h4, h5, h6, p, ul, ol {
     margin: 1em 0;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+#header {
+    background-color: rgb(69, 0, 231);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header .title {
+    margin: 0;
+    padding: 0 1rem;
+    color: #ffffff
+}
+
+#header .options {
+    height: 100%;
+    display: flex;
+}
+
+#header .options button {
+    padding: 0 1rem;
+    background-color: rgb(76, 0, 255);
+    color: white;
+    font-size: 1.1rem;
+}
+
+#header .options button:hover {
+    background-color: rgb(62, 0, 255);
+}
+
+/* for mobile */
+
+@media screen and (max-width: 550px) {
+    #header .title  {
+        font-size: 1.2rem;
+    }
+
+    #header .options button {
+        padding: 0 0.5rem;
+        font-size: 0.9rem;
+    }
 }
