@@ -8,9 +8,10 @@ router.post("/register", async (req,res) => {
     try {
         // Registration Process Validation
 
-        let { email, password, passwordCheck, userName } = req.body; // Destructing these variables
-
-        if (!email || !password || !passwordCheck || !userName ) {
+        let { email, password, verifyPassword, username } = req.body; // Destructing these variables
+        console.log(req.body);
+        if (!email || !password || !username ) {
+            console.log('not all fields')
             return res.status(400).json({ msg: "Not all fields have been entered."});
         }
 
@@ -18,7 +19,7 @@ router.post("/register", async (req,res) => {
             return res.status(400).json({ msg: "The password needs to be at least 5 characters long!"});
         }
 
-        if (password !== passwordCheck) {
+        if (password !== verifyPassword) {
             return res.status(400).json({ msg: "Enter the same password twice for correct verification."});
         }
 
@@ -28,8 +29,8 @@ router.post("/register", async (req,res) => {
             return res.status(400).json({ msg: "An account with this email already exists. "});
         }
 
-        if (!userName) {
-            userName = email;
+        if (!username) {
+            username = email;
         }
 
         // Generate a bcrypt salt.
@@ -40,7 +41,7 @@ router.post("/register", async (req,res) => {
         const createdUser = new User({
             email, 
             password: passwordHash,
-            userName
+            username
         });
         // console.log(passwordHash);
         // then save.
@@ -62,18 +63,21 @@ router.post('/login', async (req, res) => {
         // do validation
 
         if (!email || !password) {
+            console.log("not all")
             return res.status(400).json({ msg: "Not all fields have been entered." });
         }
 
         const user = await User.findOne({ email: email });
 
         if (!user) {
+            console.log("bruh");
             return res.status(400).json({ msg: "No account with this email exists." });
         }
 
         const compareHash  = await bcrypt.compare( password, user.password);
 
         if (!compareHash) {
+            console.log("bruh invalid hash");
             return res.status(400).json( {msg: "Invalid credientials." });
         }
 
@@ -83,13 +87,23 @@ router.post('/login', async (req, res) => {
             jwtToken, 
             user: {
                 id: user._id,
-                userName: user.userName,
-                email: user.email,
+                username: user.username,
             },
         });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+});
+
+// Retrieve all users.
+router.get("/", auth, async (req, res) => {
+    const user = await User.findById(req.user);
+
+    res.json({
+        username: user.username,
+        id: user._id
+    }
+    );
 });
 
 // Contains an authentication middleware to verify 
