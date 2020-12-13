@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import Options from "../auth/options";
+import Options from "../auth/Options";
 
 
-export default function header() {
+export default function Header() {
     return (
         <header id = "header">
             <Link to="/"> 
