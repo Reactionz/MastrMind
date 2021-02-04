@@ -19,6 +19,8 @@ router.post("/register", async (req,res) => {
             return res.status(400).json({ msg: "The password needs to be at least 5 characters long!"});
         }
 
+        // TODO: Add capability to not only go by length by the amount of special characters.
+
         if (password !== verifyPassword) {
             return res.status(400).json({ msg: "Enter the same password twice for correct verification."});
         }

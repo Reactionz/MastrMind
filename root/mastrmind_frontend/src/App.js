@@ -4,6 +4,7 @@ import Home from './components/pages/Home';
 import Login from './components/auth/LoginPage';
 import Register from './components/auth/RegisterPage';
 import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import UserContext from './context/user_context';
 import Axios from 'axios';
 
@@ -63,6 +64,7 @@ export default function App() {
                         </Switch>
                 </UserContext.Provider>
             </BrowserRouter>
+            <Footer />
         </>
     );
 }
