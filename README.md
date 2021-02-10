@@ -17,6 +17,7 @@ CSS
 # Requirements for Installation and Usage
 NPM (Node Package Manager)
 A Desktop / Mobile Browser
+A Environment File to connect to MongoDB (.env)
 
 Currently, the application does not start on it's own; however, there are some steps that can be taken to get it running locally.
 
