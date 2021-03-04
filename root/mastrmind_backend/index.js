@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());    // This allows us to use JSON.
 app.use(cors());
 
-const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
+const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || 30) : 3000;
 
 app.listen(PORT, () => {
     console.log(`the server is listening at ${PORT}!`)
