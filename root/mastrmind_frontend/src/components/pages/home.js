@@ -1,9 +1,11 @@
 import React from 'react'
+import Controller from '../controller/controller'
 
 export default function Home() {
     return (
-        <div>
-            Home
-        </div>
+        <Controller.Button
+        text = "Add Task +"
+        variant = "outlined"
+        />
     )
 }
