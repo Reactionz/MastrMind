@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dialog, DialogTitle, DialogContent, makeStyles, Typography } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, makeStyles, Typography, Box } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -8,6 +8,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Grid from '@material-ui/core/Grid';
 import Controller from '../controller/controller'
+
+
 
 const useStyles = makeStyles(theme => ({
     dialogWrapper: {
@@ -29,10 +31,11 @@ export default function Popup(props) {
         <Dialog open = {openPopup} maxWidth="sm">
             <DialogTitle position="center">
                 <div style = {{display: 'flex'}}>
-                    <Typography variant="h6" component="div" style={{flexGrow:1}}>
+                    <Typography variant="h6" component="div" style={{flexGrow:2}}>
+                        
                         ADD A NEW TASK
                     </Typography>
-
+                    
                     <Controller.Button
                     text = "close"
                     color = "secondary"
@@ -51,9 +54,10 @@ export default function Popup(props) {
                     fullWidth
                     margin="normal"
                 />
-
+                <Box mt={3}>
                 <RadioGroup row aria-label="priority" name="priority">
                     <FormLabel component="legend" margin="normal">Task's Priority Level:</FormLabel>
+                    <Box mt={1}>
                     <FormControlLabel
                         value="high"
                         control={<Radio color="primary" />}
@@ -72,7 +76,9 @@ export default function Popup(props) {
                         label="Low"
                         labelPlacement="top"
                         />
+                    </Box>
                 </RadioGroup>
+                </Box>
 
                 <TextField
                     id="end_date"
@@ -90,6 +96,8 @@ export default function Popup(props) {
                     variant = "outlined"
                     onClick = {() => setOpenPopup(false)}
                 />
+
+                
 
             </FormGroup>
 
