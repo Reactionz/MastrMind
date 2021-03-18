@@ -6,6 +6,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import Grid from '@material-ui/core/Grid';
+import Controller from '../controller/controller'
 
 const useStyles = makeStyles(theme => ({
     dialogWrapper: {
@@ -25,11 +27,22 @@ export default function Popup(props) {
 
     return (
         <Dialog open = {openPopup} maxWidth="sm">
-            <DialogTitle>
-                <div>-------- ADD A NEW TASK --------</div>
+            <DialogTitle position="center">
+                <div style = {{display: 'flex'}}>
+                    <Typography variant="h6" component="div" style={{flexGrow:1}}>
+                        ADD A NEW TASK
+                    </Typography>
+
+                    <Controller.Button
+                    text = "close"
+                    color = "secondary"
+                    variant = "text"
+                    onClick = {() => setOpenPopup(false)}
+                />
+                </div>
             </DialogTitle>
             <DialogContent dividers>
-            <FormGroup aria-label="position" row>
+            <FormGroup aria-label="position" column>
                 <TextField
                     id="task"
                     label="New Task"
@@ -38,27 +51,46 @@ export default function Popup(props) {
                     fullWidth
                     margin="normal"
                 />
-                <RadioGroup row aria-label="position" name="position" defaultValue="top">
+
+                <RadioGroup row aria-label="priority" name="priority">
                     <FormLabel component="legend" margin="normal">Task's Priority Level:</FormLabel>
-                        <FormControlLabel
-                            value="high"
-                            control={<Radio color="primary" />}
-                            label="High"
-                            labelPlacement="top"
-                            />
-                        <FormControlLabel
-                            value="meduim"
-                            control={<Radio color="primary" />}
-                            label="Meduim"
-                            labelPlacement="top"
-                            />
-                        <FormControlLabel
-                            value="low"
-                            control={<Radio color="primary" />}
-                            label="Low"
-                            labelPlacement="top"
-                            />
+                    <FormControlLabel
+                        value="high"
+                        control={<Radio color="primary" />}
+                        label="High"
+                        labelPlacement="top"
+                        />
+                    <FormControlLabel
+                        value="meduim"
+                        control={<Radio color="primary" />}
+                        label="Meduim"
+                        labelPlacement="top"
+                        />
+                    <FormControlLabel
+                        value="low"
+                        control={<Radio color="primary" />}
+                        label="Low"
+                        labelPlacement="top"
+                        />
                 </RadioGroup>
+
+                <TextField
+                    id="end_date"
+                    label="Finish Date"
+                    type="date"
+                    className={classes.textField}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
+
+                <Controller.Button
+                    text = "Add Task"
+                    color = "primary"
+                    variant = "outlined"
+                    onClick = {() => setOpenPopup(false)}
+                />
+
             </FormGroup>
 
             </DialogContent>
