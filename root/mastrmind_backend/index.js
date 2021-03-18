@@ -1,15 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+const path = require("path");
+const expressSession = require("express-session");
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
+// const bodyParser = require("body-parser");
+const morgan = require("morgan");
 
 require("dotenv").config();
 
 
-// Setup Express for use
+// App Configuration
+
 const app = express();
 app.use(express.json());    // This allows us to use JSON.
 app.use(cors());
+app.use(morgan('dev'));
 
 const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || 30) : 3000;
 

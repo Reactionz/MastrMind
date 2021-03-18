@@ -9,15 +9,14 @@ export default function Home() {
     const [openPopup, setOpenPopup] = useState(false)
     
     return (
+    // the Controller.Button must be with the Popup in order for it to work
+    // make sure they are together if you want to move them.
     <body>
-        /*This portion of the code creates the add task button*/
         <Controller.Button
         text = "Add Task +"
         variant = "outlined"
         onClick = {() => setOpenPopup(true)}
         />
-        /*This popup must be with the button above. If you want to
-        move the button, then include this with it.*/
         <Popup
         openPopup = {openPopup}
         setOpenPopup = {setOpenPopup}
