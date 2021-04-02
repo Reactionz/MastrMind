@@ -8,11 +8,6 @@
     box-sizing: border-box;
 }
 
-a {
-    color: #ffffff;
-    text-decoration: unset;
-}
-
 ul {
     margin-left: 1.5rem;
     list-style: none;
@@ -31,35 +26,6 @@ h1, h2, h3, h4, h5, h6, p, ul, ol {
 
 body {
     font-family: "Montserrat", sans-serif;
-}
-
-#header {
-    background-color: rgb(69, 0, 231);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#header .title {
-    margin: 0;
-    padding: 0 1rem;
-    color: #ffffff
-}
-
-#header .options {
-    height: 100%;
-    display: flex;
-}
-
-#header .options button {
-    padding: 0 1rem;
-    background-color: rgb(76, 0, 255);
-    color: white;
-    font-size: 1.1rem;
-}
-
-#header .options button:hover {
-    background-color: rgb(62, 0, 255);
 }
 
 /* for mobile */

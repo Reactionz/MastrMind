@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import Options from "../auth/options"
 import { AppBar, Grid, Toolbar } from '@material-ui/core'
 
+import './header.css'
+
 
 export default function Header() {
     return (

@@ -1,9 +1,12 @@
 import React from 'react'
+import Calendar from './calendar'
 
-export default function Home() {
+function Home() {
     return (
         <div>
-            Home
+            <Calendar />
         </div>
     )
 }
+
+export default Home
