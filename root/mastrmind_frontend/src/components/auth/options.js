@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import userContext from "../../context/user_context"
-import {Button, Menu, MenuItem} from "@material-ui/core"
-import { createUseStyles } from 'react-jss'
+import {Button, Menu, MenuItem } from "@material-ui/core"
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
-const useStyles = createUseStyles({
-    root: {
-    paddingTop: 9,
+const theme = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      text: {
+        color: 'white',
+      }
+    }
   }
-})
+});
 
 export default function Options() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,16 +45,16 @@ export default function Options() {
         setAnchorEl(null);
     };
 
-    const classes = useStyles();
-
     return (
         <nav className="options">
           {userData.user ? (
             <>
-            <div className={classes.root}>
+            <div>
+              <ThemeProvider theme={theme}>
               <Button size="large" aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
                 Menu
-                </Button>
+              </Button>
+              </ThemeProvider>
               <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
@@ -64,10 +68,12 @@ export default function Options() {
             </>
           ) : (
             <>
-              <div className={classes.root}>
+              <div>
+                <ThemeProvider theme={theme}>
                 <Button size="large" aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
                   Menu
                 </Button>
+                </ThemeProvider>
                 <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
