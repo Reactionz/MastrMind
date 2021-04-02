@@ -6,7 +6,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import Grid from '@material-ui/core/Grid';
 import Controller from '../controller/controller'
 
 
@@ -26,6 +25,14 @@ export default function Popup(props) {
 
     const { title, children, openPopup, setOpenPopup } = props;
     const classes = useStyles();
+    const CHARACTER_LIMIT = 25;
+    const [values, setValues] = React.useState({
+      name: ""
+    });
+
+    const handleChange = name => event => {
+        setValues({ ...values, [name]: event.target.value });
+    };
 
     return (
         <Dialog open = {openPopup} maxWidth="sm">
@@ -37,15 +44,28 @@ export default function Popup(props) {
                     </Typography>
                     
                     <Controller.Button
-                    text = "close"
+                    text = "x"
                     color = "secondary"
                     variant = "text"
-                    onClick = {() => setOpenPopup(false)}
+                    size = "small"
+                    variant = "contained"
+                    onClick = {() => { values.name = ""; setOpenPopup(false);}}
                 />
                 </div>
             </DialogTitle>
             <DialogContent dividers>
             <FormGroup aria-label="position" column>
+                <TextField
+                    label="Task Title"
+                    inputProps={{
+                    maxlength: CHARACTER_LIMIT
+                    }}
+                    value={values.name}
+                    helperText={`${values.name.length}/${CHARACTER_LIMIT}`}
+                    onChange={handleChange("name")}
+                    margin="normal"
+                    variant="outlined"
+                />
                 <TextField
                     id="task"
                     label="New Task"
@@ -94,7 +114,7 @@ export default function Popup(props) {
                     text = "Add Task"
                     color = "primary"
                     variant = "outlined"
-                    onClick = {() => setOpenPopup(false)}
+                    onClick = {() => { values.name = ""; setOpenPopup(false);}}
                 />
 
                 
