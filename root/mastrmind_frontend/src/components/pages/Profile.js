@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const retrieveUser = async (user) => {
+    const profileId = user.id;
+    
     await Axios.get(`http://localhost:3001/auth/profile/${profileId}`);
 }
 
