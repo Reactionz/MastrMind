@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from "react-router-dom";
-import userContext from "../../context/user_context"
+import AuthContext  from "../../context/user_context"
 import {Button, Menu, MenuItem} from "@material-ui/core"
 import { createUseStyles } from 'react-jss'
 
@@ -12,40 +12,49 @@ const useStyles = createUseStyles({
 
 export default function Options() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+      setAnchorEl(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+      setAnchorEl(null);
     };
 
-    const { userData, setUserData } = useContext(userContext);
+    const { userData, setUserData, loggedIn } = useContext(AuthContext);
     // console.log(userData);
     const history = useHistory();
 
     const registration = () => {
-        history.push("/register");
-        setAnchorEl(null);
+      history.push("/register");
+      setAnchorEl(null);
     };
     const login = () => {
-        history.push("/login");
-        setAnchorEl(null);
+      console.log("going to login page");
+      history.push("/login");
+      setAnchorEl(null);
     };
     const logout = () => {
-        setUserData({
-            token: undefined,
-            user: undefined
-        });
-        localStorage.setItem("auth-token", "");
-        setAnchorEl(null);
+      console.log("going to logout");
+      history.push("/logout");
+      setAnchorEl(null);
     };
+
+    const profile = () => {
+      history.push("/profile");
+      setAnchorEl(null);
+    };
+    
+    const dashboard = () => {
+      history.push("/dashboard");
+      setAnchorEl(null);
+    }
 
     const classes = useStyles();
 
     return (
         <nav className="options">
-          {userData.user ? (
+          {loggedIn === true ? (
             <>
             <div className={classes.root}>
               <Button size="large" aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
@@ -58,7 +67,10 @@ export default function Options() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={logout} >Logout</MenuItem>
+                <MenuItem onClick = {dashboard}> Dashboard </MenuItem>
+                <MenuItem onClick = {profile}> Profile </MenuItem>
+                <MenuItem onClick={logout} >Logout </MenuItem>
+
               </Menu>
             </div>
             </>
@@ -75,7 +87,7 @@ export default function Options() {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={registration} >Register</MenuItem>
+                  <MenuItem onClick={registration}>Register</MenuItem>
                   <MenuItem onClick={login}>Login</MenuItem>
                 </Menu>
               </div>

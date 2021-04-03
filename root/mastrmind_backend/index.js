@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
@@ -9,9 +9,16 @@ require("dotenv").config();
 // Setup Express for use
 const app = express();
 app.use(express.json());    // This allows us to use JSON.
-app.use(cors());
 
-const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || 30) : 3000;
+// Accepted Origins for our application
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+}));
+
+app.use(cookieParser());
+
+const PORT = process.env.NODE_ENV === 'production' ? (process.env.PORT || 30) : 3001;
 
 app.listen(PORT, () => {
     console.log(`the server is listening at ${PORT}!`)
@@ -30,4 +37,4 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
 
 // Setup all routes to be used.
 
-app.use("/users", require("./routes/user_router"));
+app.use("/auth", require("./routes/user_router"));

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import userContext from "../../context/user_context";
+import AuthContext from "../../context/user_context";
 import Axios from 'axios';
 import { TextField, makeStyles, Button, Grid, Paper, Typography } from '@material-ui/core'
 
@@ -17,44 +17,32 @@ export default function RegisterPage() {
 
     const classes = useStyles();
 
-    const [email, setEmail] = useState();
-    const [password, setPassword ] = useState();
-    const [verifyPassword, setVerifyPassword] = useState();
-    const [username, setUserName ] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword ] = useState("");
+    const [verifyPassword, setVerifyPassword] = useState("");
+    const [username, setUserName ] = useState("");
 
     const paddingTop = { paddingTop: 40 }
 
-    const { setUserData } = useContext(userContext);
+    const { getLoggedIn } = useContext(AuthContext);
     const history = useHistory();
 
     const formSubmit = async (e) => {
         e.preventDefault(); // allows page to not reload
 
-        const newUser = { email, password, verifyPassword, username };
-        // const registrationResponse = await Axios.post(
-        //     "http://localhost:8080/users/register",
-        //     newUser
-        // );
-        console.log(newUser);
-        console.log("posting"); 
-        await Axios.post("http://localhost:3000/users/register", newUser);
-        
-        const loginResponse = await Axios.post(
-            "http://localhost:3000/users/login", 
-            {
-                email, 
-                password
-        
-            }
-        );
+        try {
 
-        setUserData({
-            token: loginResponse.data.token,
-            user: loginResponse.data.user
-        });
+            const newUser = { email, password, verifyPassword, username };
+            console.log(newUser);
+            console.log("posting"); 
+            await Axios.post("http://localhost:3001/auth/register", newUser);
 
-        localStorage.setItem("auth-token", loginResponse.data.token);   // save jwt to browser
-        history.push("/"); // take back to home page
+            await getLoggedIn();
+
+            history.push("/dashboard"); // take back to home page
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     return (
