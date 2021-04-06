@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
+import Sidebar from '../layout/sidebar.js'
 
 import './calendar.css'
 
@@ -51,32 +52,7 @@ export default class Calendar extends React.Component {
 
     renderSidebar() {
         return (
-            <div className='home-sidebar'>
-                <div className='home-sidebar-section'>
-                    <h2>Instructions</h2>
-                    <ul>
-                        <li>Select dates and you will be prompted to create a new event.</li>
-                        <li>Drag, drop, and resize events.</li>
-                        <li>Click an event to delete it.</li>
-                    </ul>
-                </div>
-                <div className='home-sidebar-section'>
-                    <label>
-                        <input
-                            type='checkbox'
-                            checked={this.state.weekendsVisible}
-                            onChange={this.handleWeekendsToggle}
-                        ></input>
-                        Show/Hide Weekends
-                    </label>
-                </div>
-                <div className='home-sidebar-section'>
-                    <h2>All Events ({this.state.currentEvents.length})</h2>
-                    <ul>
-                        {this.state.currentEvents.map(renderSidebarEvent)}
-                    </ul>
-                </div>
-            </div>
+            <Sidebar />
         )
     }
 
