@@ -57,7 +57,7 @@ export default function LoginPage() {
                 >
                     <Grid item>
                     <Typography component="h1" variant="h5" align="center">
-                        Sign in
+                        Sign In
                     </Typography>
                     </Grid>
                     <Grid item>

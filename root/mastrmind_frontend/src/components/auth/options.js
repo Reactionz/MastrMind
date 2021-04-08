@@ -50,6 +50,11 @@ export default function Options() {
       setAnchorEl(null);
     }
 
+    const journal = () => {
+      history.push("/journal");
+      setAnchorEl(null);
+    }
+
     const classes = useStyles();
 
     return (
@@ -68,6 +73,7 @@ export default function Options() {
                 onClose={handleClose}
               >
                 <MenuItem onClick = {dashboard}> Dashboard </MenuItem>
+                <MenuItem onClick = {journal}> Journal </MenuItem>
                 <MenuItem onClick = {profile}> Profile </MenuItem>
                 <MenuItem onClick={logout} >Logout </MenuItem>
 

@@ -45,6 +45,10 @@ function Router() {
                             <Route path = "/dashboard">
                                 <Calendar/>
                             </Route>
+                            <Route path = "/journal">
+                                <div> Work in Progress </div>
+                                {/* <Journal/> */}
+                            </Route>
                             <Route path="/logout">
                                 <LogOut />
                             </Route>
