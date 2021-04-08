@@ -7,7 +7,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Controller from '../controller/controller'
-
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const useStyles = makeStyles(theme => ({
@@ -43,8 +43,7 @@ export default function Popup(props) {
                         ADD A NEW TASK
                     </Typography>
                     
-                    <Controller.Button
-                    text = "x"
+                    <CloseIcon
                     color = "secondary"
                     variant = "text"
                     size = "small"

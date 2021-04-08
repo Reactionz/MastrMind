@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import Sidebar from '../layout/sidebar.js'
+import Calendarfunct from '../layout/calendarfunct.js'
 
 import './calendar.css'
 
@@ -20,31 +21,7 @@ export default class Calendar extends React.Component {
             <div className='home'>
                 {this.renderSidebar()}
                 <div className='home-main'>
-                    <FullCalendar 
-                        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                        headerToolbar={{
-                            left: 'prev next today',
-                            center: 'title', 
-                            right: 'dayGridMonth timeGridWeek timeGridDay'
-                        }}
-                        initialView='dayGridMonth'
-                        showNonCurrentDates={true}
-                        editable={true}
-                        selectable={true}
-                        selectMirror={true}
-                        dayMaxEvents={true}
-                        weekends={this.state.weekendsVisible}
-                        initialEvents={INITIAL_EVENTS} // alternatively, use 'events' setting to fetch from a feed
-                        select={this.handleDateSelect}
-                        eventContent={renderEventContent} // custom render function
-                        eventClick={this.handleEventClick}
-                        eventsSet={this.handleEvents} //called after events are initialized/added/changed/removed
-                        /* you can update Mongo DB when these fire:
-                        eventAdd={function(){}}
-                        eventChange={function(){}}
-                        eventRemove={function(){}}
-                        */ 
-                    />
+                    {this.renderCalendar()}
                 </div>
             </div>
         )
@@ -55,6 +32,11 @@ export default class Calendar extends React.Component {
             <Sidebar />
         )
     }
+    renderCalendar() {
+        return(
+            <Calendarfunct/>
+        )
+    }
 
     handleWeekendsToggle = () => {
         this.setState({
@@ -63,7 +45,7 @@ export default class Calendar extends React.Component {
     }
 
     handleDateSelect = (selectInfo) => {
-        let title = prompt('Please enter a new title for your event')
+        let title = Calendarfunct.popup.values.name
         let calendarApi = selectInfo.view.calendar
 
         calendarApi.unselect()
@@ -89,24 +71,15 @@ export default class Calendar extends React.Component {
             currentEvents: events
         })
     }
-}
 
-function renderEventContent(eventInfo) {
-    return (
-        <>
-            <b>{eventInfo.timeText}</b>
-            <i>{eventInfo.event.title}</i>
-        </>
-    )
-}
-
-function renderSidebarEvent(event) {
-    return(
-        <li key={event.id}>
-            <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-            <i>{event.title}</i>
-        </li>
-    )
+    renderEventContent(eventInfo) {
+        return (
+            <>
+                <b>{eventInfo.timeText}</b>
+                <i>{eventInfo.event.title}</i>
+            </>
+        )
+    }
 }
  
 
