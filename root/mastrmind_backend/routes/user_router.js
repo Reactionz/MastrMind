@@ -3,6 +3,7 @@ const User = require("../models/user_model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const auth = require("../mware/auth");
+const { response } = require("express");
 
 router.post("/register", async (req,res) => {
     try {
@@ -127,17 +128,6 @@ router.get("/logout", (req, res) => {
 })
 // route to get our specific user
 
-router.get("/profile/:profileId", auth, (req, res) => {
-    
-    User.findById(req.params.profileId, (user, err) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(user);
-        }
-    })
-})
-
 // Contains an authentication middleware to verify 
 // the user is logged in to delete their account.
 
@@ -162,7 +152,7 @@ router.get("/loggedIn", (req, res) => {
 
         const token = req.cookies.token;
         console.log(`here is our token: ${token}`)
-        if (!token) return res.json(false);
+        if (!token) return res.send(false);
         
         console.log("verifying the token")
         jwt.verify(token, process.env.JWT_SECRET);
@@ -175,13 +165,31 @@ router.get("/loggedIn", (req, res) => {
 
 // Once a user is logged in, certain things will not be able to be done
 // for a user that is not logged in or does not exist.
-// router.get("/profile", auth, (req, res) => {
-//     try {
-//         const currentUser = req.user;
-//         console.log(currentUser);
-//     } catch (err) {
-//         res.status(500).json({error: err.message});
-//     }
-// })
+router.get("/profile", auth, async (req, res) => {
+    try {
+        // find the current user
+        const currentUser = await User.findById(req.id).exec();
+
+        // when query executed, check if there is an existing user.
+        if(!currentUser) {
+            return res.status(404).send('The profile was not found');
+        }
+        // send the user once everything is done
+        res.send(currentUser);
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+})
+
+// edit profile
+router.post("/profile", auth, async (req, res) => {
+    try {
+        const currentUser = await User.findOneAndUpdate(req.id).exec();
+
+        res.send(currentUser)
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+})
 
 module.exports = router;

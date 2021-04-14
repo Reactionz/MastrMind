@@ -7,16 +7,19 @@ const auth = (req, res, next) => {
         const jwtToken = req.cookies.token;
 
         if(!jwtToken) {
-            return res.status(401).json({ msg: "No auth token, auth denied. "});
+            return res.status(401).json({ msg: "No auth token, auth denied."});
         }
+
+        console.log("There is an auth token!")
 
         const verifyJWT = jwt.verify(jwtToken, process.env.JWT_SECRET);
 
         if (!verifyJWT) {
             return res.status(401).json({msg: "Token verification failed, auth denied."});
         }
-        
-        req.user = verifyJWT.user;
+        console.log(verifyJWT);
+        req.id = verifyJWT.id;
+
         next();
     } catch (err) {
         return res.status(401).json( {error: err.message} );

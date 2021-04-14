@@ -7,7 +7,10 @@ const userSchema = new mongoose.Schema({
     birthDate: {type: Date},
     phoneNumber: {type: String},
     bio: {type: String, maxlength: 160},
-    badgeCount: {type: Number, default: 0, required: true}
+    badgeCount: {type: Number, default: 0, required: true},
+    badge: [{ type: mongoose.Schema.Types.ObjectID, ref: 'badge'}],
+    task: [{type: mongoose.Schema.Types.ObjectID, ref: 'task'}],
+    event: [{type: mongoose.Schema.Types.ObjectID, ref: 'event'}]
 });
 
 module.exports = User = mongoose.model("user", userSchema);

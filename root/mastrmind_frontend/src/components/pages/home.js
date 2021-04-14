@@ -1,5 +1,6 @@
 import React, { useContext }from 'react';
 import { useHistory } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 import AuthContext from "../../context/user_context";
 
 export default function Home() {
@@ -10,11 +11,13 @@ export default function Home() {
     return (
         <>
         { loggedIn === true && (
-            <div> You're Logged In! </div>
+        <div>
+            <Typography variant = "h3" >Welcome to Mastrmind! You're Logged In! </Typography>
+        </div>
         )}
         { loggedIn === false && (
         <div>
-            Please Login!
+            <Typography variant = "h3"> Welcome to Mastrmind! Please Login! </Typography>
         </div>
         )}
         </>
