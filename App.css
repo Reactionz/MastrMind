@@ -1,16 +1,27 @@
 h1 {
   text-align: center;
-  margin-top: 50px;
+  color: "black";
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
+
+/*  Pulling header style function from app.js to incorporate here instead
+     const headerStyle = {
+      color: "black",
+      backgroundColor: "lightblue",
+      padding: "60px",
+      fontFamily: "TimesNewRoman"
+    }; */
 
 .App {
   text-align: center;
 }
 
-.App .TextEditor {
+.App .TextEditor.js {
   width: 800px;
-  margin-left: 25;
-  margin-top: 50px;
+  margin-left: 25px;
+  margin-top: 0px;
 }
 
 .App-logo {
@@ -36,7 +47,7 @@ h1 {
 }
 
 .App-link {
-  color: #61dafb;
+  color: #1d56f0;
 }
 
 @keyframes App-logo-spin {
