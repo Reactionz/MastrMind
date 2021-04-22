@@ -3,7 +3,6 @@ import Calendar from '../pages/calendar.js'
 import { formatDate } from '@fullcalendar/react'
 import Controller from '../controller/controller'
 import Popup from  '../controller/popup'
-import newtask from '../newtask'
 import { useState } from "react";
 import TextField from '@material-ui/core/TextField';
 

@@ -34,7 +34,8 @@ export default function Event(props) {
     const classes = useStyles();
     const CHARACTER_LIMIT = 25;
     const [values, setValues] = React.useState({
-      name: ""
+      name: "",
+      event: ""
     });
 
     const handleChange = name => event => {
@@ -76,7 +77,7 @@ export default function Event(props) {
                     text = "Add Event"
                     color = "primary"
                     variant = "outlined"
-                    onClick = {() => { values.name = ""; setOpenEvent(false);}}
+                    onClick = {() => { values.event = values.name; values.name = ""; setOpenEvent(false);}}
                 />
 
                 
@@ -87,3 +88,4 @@ export default function Event(props) {
         </Dialog>
     )
 }
+

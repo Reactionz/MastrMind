@@ -45,7 +45,8 @@ export default class Calendar extends React.Component {
     }
 
     handleDateSelect = (selectInfo) => {
-        let title = Calendarfunct.popup.values.name
+        console.log("adding ", Calendarfunct.Event.values.event )
+        let title = Calendarfunct.Event.values.event
         let calendarApi = selectInfo.view.calendar
 
         calendarApi.unselect()
