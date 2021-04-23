@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Popup(props) {
 
-    const { title, children, openPopup, setOpenPopup } = props;
+    const { openPopup, setOpenPopup } = props;
     const classes = useStyles();
     const CHARACTER_LIMIT = 25;
     const [values, setValues] = React.useState({
@@ -45,7 +45,6 @@ export default function Popup(props) {
                     
                     <CloseIcon
                     color = "secondary"
-                    variant = "text"
                     size = "small"
                     variant = "contained"
                     onClick = {() => { values.name = ""; setOpenPopup(false);}}
@@ -98,6 +97,8 @@ export default function Popup(props) {
                     </Box>
                 </RadioGroup>
                 </Box>
+
+                
 
                 <TextField
                     id="end_date"

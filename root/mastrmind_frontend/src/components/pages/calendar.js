@@ -1,13 +1,13 @@
 import React from 'react'
-import FullCalendar, { formatDate} from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import Sidebar from '../layout/sidebar.js'
-import Calendarfunct from '../layout/calendarfunct.js'
-
 import './calendar.css'
+import Task from '../layout/task.js'
+import Controller from '../controller/controller.js'
 
 export default class Calendar extends React.Component {
 
@@ -32,21 +32,50 @@ export default class Calendar extends React.Component {
             <Sidebar />
         )
     }
-    renderCalendar() {
+
+    renderTask() {
         return(
-            <Calendarfunct/>
+            <Task />
         )
     }
 
-    handleWeekendsToggle = () => {
-        this.setState({
-            weekendsVisible: !this.state.weekendsVisible
-        })
+    renderCalendar() {
+        return(
+            <>
+            <FullCalendar
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                headerToolbar={{
+                    left: 'prev next today',
+                    center: 'title',
+                    right: 'dayGridMonth timeGridWeek timeGridDay'
+                }}
+                initialView='dayGridMonth'
+                showNonCurrentDates={true}
+                editable={true}
+                selectable={true}
+                selectMirror={true}
+                dayMaxEvents={true}
+                initialEvents={INITIAL_EVENTS} // alternatively, use 'events' setting to fetch from a feed
+                select={this.handleDateSelect}
+                eventContent={renderEventContent} // custom render function
+                eventClick={this.handleEventClick}
+                eventsSet={this.handleEvents}
+                eventAdd={function () { }} //called after events are initialized/added/changed/removed
+                /* you can update Mongo DB when these fire:
+
+                eventChange={function(){}}
+                eventRemove={function(){}}
+                */
+            />
+            <Task></Task>
+            </>
+        )
     }
 
     handleDateSelect = (selectInfo) => {
-        console.log("adding ", Calendarfunct.Event.values.event )
-        let title = Calendarfunct.Event.values.event
+        console.log("adding ", Task.values.event )
+        
+        let title = Event.values.event
         let calendarApi = selectInfo.view.calendar
 
         calendarApi.unselect()
@@ -72,15 +101,15 @@ export default class Calendar extends React.Component {
             currentEvents: events
         })
     }
+}
 
-    renderEventContent(eventInfo) {
-        return (
-            <>
-                <b>{eventInfo.timeText}</b>
-                <i>{eventInfo.event.title}</i>
-            </>
-        )
-    }
+function renderEventContent(eventInfo) {
+    return (
+        <>
+            <b>{eventInfo.timeText}</b>
+            <i>{eventInfo.event.title}</i>
+        </>
+    )
 }
  
 
