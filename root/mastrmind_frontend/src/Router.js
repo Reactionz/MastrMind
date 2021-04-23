@@ -7,7 +7,7 @@ import LogOut from "./components/auth/logout";
 import Header from './components/layout/header';
 import AuthContext from "./context/user_context";
 import Profile from "./components/pages/Profile";
-import Calendar from "./components/pages/Calendar";
+import Calendar from "./components/pages/calendar";
 
 
 //TODO: Create a helper function to help handle events.
