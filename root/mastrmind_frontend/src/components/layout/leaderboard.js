@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -82,6 +83,8 @@ export default function Leaderboard() {
   );
 
 =======
+=======
+>>>>>>> d4d6bd6 (redid the leaderboard to be less cluttered and easier to insert)
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
