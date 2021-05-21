@@ -1,0 +1,14 @@
+app.get('/about', (req, res) => {
+    //res.sendFile(path.resolve(_dirname, 'pages/about.html'))
+    res.render('about');
+})
+
+app.get('/contact', (req, res) => {
+    //res.sendFile(path.resolve(_dirname, 'pages/contact.html'))
+    res.render('contact');
+})
+
+app.get('/post', (req, res) => {
+    //res.sendFile(path.resolve(_dirname, 'pages/post.html'))
+    res.render('post');
+})

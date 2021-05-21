@@ -1,0 +1,9 @@
+This folder is for stuff I did for the project that was not directly related to the features I worked on.
+ 
+Before this project, I had never used React or made a project this big with a front and back end. 
+These files are part of what I did on my local machine throughout the project as practice to become familiar with the languages and technologies we were using for the real thing.
+ 
+I followed tutorials from books and played around with the code to see what changing certain parts would do to the web page. 
+
+The code is commented out in each file (sometimes multiple times as new ideas were introduced) so that it can be merged into main for grading and 
+does not interfere with the code used in the project!
