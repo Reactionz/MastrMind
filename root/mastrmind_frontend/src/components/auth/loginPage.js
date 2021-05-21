@@ -34,7 +34,7 @@ export default function LoginPage() {
             await axios.post("http://localhost:3001/auth/login", userLogin);
             await getLoggedIn();
             // localStorage.setItem("auth-token", loginResponse.data.token);
-            history.push("/dashboard");  // would redirect to an account page but I'll research into that.
+            history.push("/calendar");  // would redirect to an account page but I'll research into that.
 
         } catch (err) {
             console.error(err);

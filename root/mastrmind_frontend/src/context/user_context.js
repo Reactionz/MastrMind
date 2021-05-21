@@ -4,24 +4,35 @@ import React, { createContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 
 function AuthContextProvider(props) {
-    const [loggedIn, setLoggedIn] = useState(undefined);
+    const [ loggedIn, setLoggedIn ] = useState(undefined);
+    const [ userProfile, setUserProfile ] = useState({});
+    const [ loading, setLoading] = useState(true); // make true
 
     async function getLoggedIn() {
-        console.log("inside get logged in function")
         const userLoginResponse = await axios.get(
             "http://localhost:3001/auth/loggedIn"
         );
-        console.log(`user login response in get logged in: ${userLoginResponse.data}`);
-        
         setLoggedIn(userLoginResponse.data);
     }
 
+    async function getUser() {
+        await axios.get(
+            "http://localhost:3001/auth/profile",
+            {crossdomain: true}
+        ).then((response) => {
+            setUserProfile(response.data);
+            setLoading(false)
+            console.log(response.data);
+        });
+    }
+
     useEffect( () => {
-        getLoggedIn();
+        getLoggedIn();     
+        getUser();
     }, []);
 
     return (
-        <AuthContext.Provider value = { { loggedIn, getLoggedIn } } >
+        <AuthContext.Provider value = { { loggedIn, getLoggedIn, userProfile, loading} } >
             {props.children}
         </AuthContext.Provider>
     );

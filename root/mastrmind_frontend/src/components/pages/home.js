@@ -1,11 +1,9 @@
 import React, { useContext }from 'react';
-import { useHistory } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import AuthContext from "../../context/user_context";
 
 export default function Home() {
     
-    const history = useHistory();
     const { loggedIn } = useContext(AuthContext);
 
     return (
@@ -16,6 +14,11 @@ export default function Home() {
         </div>
         )}
         { loggedIn === false && (
+        <div>
+            <Typography variant = "h3"> Welcome to Mastrmind! Please Login! </Typography>
+        </div>
+        )}
+        { loggedIn === undefined && (
         <div>
             <Typography variant = "h3"> Welcome to Mastrmind! Please Login! </Typography>
         </div>

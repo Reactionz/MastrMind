@@ -10,7 +10,7 @@ export default function Header() {
             <Toolbar>
                 <Grid container>
                     <Grid item sm={4}>
-                        <Link to="/"> 
+                        <Link to="/calendar"> 
                             <h3 className = "title">
                                 MastrMind
                             </h3> 

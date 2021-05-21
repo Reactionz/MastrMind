@@ -21,7 +21,7 @@ export default function Options() {
       setAnchorEl(null);
     };
 
-    const { userData, setUserData, loggedIn } = useContext(AuthContext);
+    const { userData, setUserData, loggedIn} = useContext(AuthContext);
     // console.log(userData);
     const history = useHistory();
 
@@ -45,8 +45,8 @@ export default function Options() {
       setAnchorEl(null);
     };
     
-    const dashboard = () => {
-      history.push("/dashboard");
+    const calendar = () => {
+      history.push("/calendar");
       setAnchorEl(null);
     }
 
@@ -72,7 +72,7 @@ export default function Options() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick = {dashboard}> Dashboard </MenuItem>
+                <MenuItem onClick = {calendar}> Calendar </MenuItem>
                 <MenuItem onClick = {journal}> Journal </MenuItem>
                 <MenuItem onClick = {profile}> Profile </MenuItem>
                 <MenuItem onClick={logout} >Logout </MenuItem>

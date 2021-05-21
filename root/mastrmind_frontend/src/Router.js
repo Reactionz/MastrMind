@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import Loader from 'react-loader-spinner'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./components/pages/home";
 import Login from "./components/auth/loginPage";
@@ -8,27 +9,21 @@ import Header from './components/layout/header';
 import AuthContext from "./context/user_context";
 import Profile from "./components/pages/Profile";
 import Calendar from "./components/pages/Calendar";
+import Journal from "./Journal"
 
 
 //TODO: Create a helper function to help handle events.
 
 function Router() {
     // Needed to give context to our application.
-    const { loggedIn, getLoggedIn } = useContext(AuthContext);
-
-    // The way that we logged in originally.
-    const [userData, setUserData ] = useState({
-        token: undefined,
-        user: undefined,
-    });
+    const { loggedIn, getLoggedIn, userProfile, getUser, setUser, loading } = useContext(AuthContext);
     return (
         
         <BrowserRouter>
-            <AuthContext.Provider value = {{setUserData, userData, getLoggedIn, loggedIn}}>
+            <AuthContext.Provider value = {{getLoggedIn, loggedIn, userProfile, getUser, setUser, loading}}>
                 <Header />
                 <Switch>
                     {/* use exact in order to make sure that it will always go to the correct route */}
-  
                     { loggedIn === false && (
                         <>
                             <Route path="/register">
@@ -42,12 +37,9 @@ function Router() {
                     { loggedIn === true && (
                         // having troubles getting the profile page to display after rendering our initial calendar
                         <>
-                            <Route path = "/dashboard">
-                                <Calendar/>
-                            </Route>
+   
                             <Route path = "/journal">
-                                <div> Work in Progress </div>
-                                {/* <Journal/> */}
+                                <Journal/>
                             </Route>
                             <Route path="/logout">
                                 <LogOut />
@@ -55,8 +47,8 @@ function Router() {
                             <Route path="/profile">
                                 <Profile />
                             </Route>
-                            <Route exact path="/">
-                                <Home />
+                            <Route path = "/calendar">
+                                <Calendar/>
                             </Route>
                     
                         </>

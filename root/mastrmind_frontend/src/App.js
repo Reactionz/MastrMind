@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Router from './Router'
 import { AuthContextProvider } from './context/user_context';
 import axios from 'axios';

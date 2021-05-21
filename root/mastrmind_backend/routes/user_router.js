@@ -3,31 +3,24 @@ const User = require("../models/user_model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const auth = require("../mware/auth");
-const { response } = require("express");
 
 router.post("/register", async (req,res) => {
     try {
         // Registration Process Validation
-        console.log("registering account");
-
         let { email, password, verifyPassword, username } = req.body; // Destructing these variables
 
-        console.log(req.body)
         if (!email || !password || !username ) {
             console.log('not all fields')
             return res.status(400).json({ msg: "Not all fields have been entered."});
         }
-
         if (password.length < 5) {
             console.log("password not long enough")
             return res.status(400).json({ msg: "The password needs to be at least 5 characters long!"});
         }
-
         if (password !== verifyPassword) {
             console.log("this is not the same password")
             return res.status(400).json({ msg: "Enter the same password twice for correct verification."});
         }
-
         const existingUser = await User.findOne({email: email});     // going to find if there is an existing user in our database
 
         if (existingUser) {
@@ -38,7 +31,6 @@ router.post("/register", async (req,res) => {
         if (!username) {
             username = email;
         }
-
         // Generate a bcrypt salt.
         const bcryptSalt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password, bcryptSalt);   // hash the password
@@ -49,10 +41,8 @@ router.post("/register", async (req,res) => {
             password: passwordHash,
             userName: username
         });
-        // console.log(passwordHash);
         // then save.
         const savedUser = await createdUser.save();
-        // res.json(savedUser);
 
         // sign our token
         const token = jwt.sign(
@@ -79,9 +69,7 @@ router.post("/register", async (req,res) => {
 router.post('/login', async (req, res) => {
     try {
         const { email , password } = req.body;
-
         // do validation
-
         if (!email || !password) {
             console.log("not all")
             return res.status(400).json({ msg: "Not all fields have been entered." });
@@ -168,8 +156,8 @@ router.get("/loggedIn", (req, res) => {
 router.get("/profile", auth, async (req, res) => {
     try {
         // find the current user
-        const currentUser = await User.findById(req.id).exec();
-
+        const currentUser = await User.findById(req.id);
+        // console.log(currentUser)
         // when query executed, check if there is an existing user.
         if(!currentUser) {
             return res.status(404).send('The profile was not found');
@@ -182,11 +170,21 @@ router.get("/profile", auth, async (req, res) => {
 })
 
 // edit profile
-router.post("/profile", auth, async (req, res) => {
+router.post("/editProfilePicture", auth, async (req, res) => {
     try {
-        const currentUser = await User.findOneAndUpdate(req.id).exec();
+        const { profilePicture } = req.body; // make sure you destructure or it won't work?
 
-        res.send(currentUser)
+        const changedUser = await User.findOneAndUpdate(
+            {_id: req.id}, 
+            { profilePicture: profilePicture }, 
+            { new: true }
+        );
+
+        if(!changedUser) {
+            return res.status(404).send('The profile was not found');
+        }
+
+        res.send(changedUser);
     } catch (err) {
         res.status(500).json({error: err.message});
     }

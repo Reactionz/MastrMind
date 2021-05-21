@@ -1,0 +1,36 @@
+h1 {
+    text-align: center;
+    color: "black";
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+  
+  /*  Pulling header style function from app.js to incorporate here instead
+       const headerStyle = {
+        color: "black",
+        backgroundColor: "lightblue",
+        padding: "60px",
+        fontFamily: "TimesNewRoman"
+      }; */
+  
+  .App {
+    text-align: center;
+  }
+  
+  .App .TextEditor.js {
+    width: 800px;
+    margin-left: 25px;
+    margin-top: 0px;
+  }
+  
+  .App-logo {
+    height: 5vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
