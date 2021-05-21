@@ -29,7 +29,7 @@ export default function Home() {
 }*/
 
 import React from 'react'
-import Calendar from './calendar'
+import Calendar from './Calendar'
 import Leaderboard from '../layout/leaderboard'
 
 function Home() {
